@@ -2,21 +2,21 @@ package com.agency04.sbss.pizza;
 
 public class PizzaDeliveryServiceImpl implements PizzaDeliveryService{
 
-    private PizzeriaNumeroUno pizzeriaNumeroUno;
-    private PizzeriaNumeroDue pizzeriaNumeroDue;
+    private PizzeriaNumeroUnoService pizzeriaNumeroUnoService;
+    private PizzeriaNumeroDueService pizzeriaNumeroDueService;
 
-    public PizzaDeliveryServiceImpl(PizzeriaNumeroUno pizzeriaNumeroUno) {
-        this.pizzeriaNumeroUno = pizzeriaNumeroUno;
+    public PizzaDeliveryServiceImpl(PizzeriaNumeroUnoService pizzeriaNumeroUnoService) {
+        this.pizzeriaNumeroUnoService = pizzeriaNumeroUnoService;
     }
 
-    public void setPizzeriaNumeroDue(PizzeriaNumeroDue pizzeriaNumeroDue) {
-        this.pizzeriaNumeroDue = pizzeriaNumeroDue;
+    public void setPizzeriaNumeroDue(PizzeriaNumeroDueService pizzeriaNumeroDueService) {
+        this.pizzeriaNumeroDueService = pizzeriaNumeroDueService;
     }
 
     @Override
     public String orderPizza(Pizza pizza){
 
-        return  "New order: \n" + pizzeriaNumeroUno.makePizza(pizza);
+        return  "New order: \n" + pizzeriaNumeroDueService.makePizza(pizza);
     }
 
 }

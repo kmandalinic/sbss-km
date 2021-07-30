@@ -1,6 +1,6 @@
 package com.agency04.sbss.pizza;
 
-public class PizzeriaNumeroUno implements PizzeriaService {
+public class PizzeriaNumeroUnoService implements PizzeriaService {
     private String name;
     private  String address;
 

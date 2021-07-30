@@ -8,17 +8,20 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Define your Beans here -->
+
+    <context:property-placeholder location="application.properties"/>
     <bean id="deliveryService"
           class="com.agency04.sbss.pizza.PizzaDeliveryServiceImpl">
-        <constructor-arg ref = "pizzeriaNumeroUno" />
-        <property name="pizzeriaNumeroDue" ref="pizzeriaNumeroDue"/>
+        <constructor-arg ref = "pizzeriaNumeroUnoService" />
+        <property name="pizzeriaNumeroDue" ref="pizzeriaNumeroDueService"/>
     </bean>
-    <bean id = "pizzeriaNumeroUno"
-          class="com.agency04.sbss.pizza.PizzeriaNumeroUno">
+    <bean id = "pizzeriaNumeroUnoService"
+          class="com.agency04.sbss.pizza.PizzeriaNumeroUnoService">
         <property name="name" value="Uno" />
     </bean>
-    <bean id = "pizzeriaNumeroDue"
-          class="com.agency04.sbss.pizza.PizzeriaNumeroDue">
-        <property name="name" value="Due" />
+    <bean id = "pizzeriaNumeroDueService"
+          class="com.agency04.sbss.pizza.PizzeriaNumeroDueService">
+        <property name="name" value="${due.name}"/>
+        <property name="address" value="${due.address}"/>
     </bean>
 </beans>

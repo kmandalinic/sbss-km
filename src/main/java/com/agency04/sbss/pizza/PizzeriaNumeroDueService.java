@@ -1,6 +1,6 @@
 package com.agency04.sbss.pizza;
 
-public class PizzeriaNumeroDue implements PizzeriaService{
+public class PizzeriaNumeroDueService implements PizzeriaService{
     private String name;
     private  String address;
 
@@ -14,7 +14,7 @@ public class PizzeriaNumeroDue implements PizzeriaService{
     }
     @Override
     public  String makePizza(Pizza pizza){
-        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " by " + name ;
+        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at " + address +")" ;
     }
 
     public void setName(String name) {
