@@ -12,7 +12,7 @@ public class PizzaApp {
         Pizza quattrostagioni = new PizzaQuatrostagioni();
 
 
-        PizzaDeliveryService pizzaDeliveryService = context.getBean("deliveryService", PizzaDeliveryService.class);
+        PizzaDeliveryService pizzaDeliveryService = context.getBean("pizzaDeliveryServiceImpl", PizzaDeliveryService.class);
         System.out.println(pizzaDeliveryService.orderPizza(quattrostagioni));
 
         context.close();

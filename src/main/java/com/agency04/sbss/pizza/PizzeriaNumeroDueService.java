@@ -1,7 +1,14 @@
 package com.agency04.sbss.pizza;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class PizzeriaNumeroDueService implements PizzeriaService{
+
+    @Value("${due.name}")
     private String name;
+    @Value("${due.address}")
     private  String address;
 
     @Override

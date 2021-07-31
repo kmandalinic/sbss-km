@@ -1,22 +1,29 @@
 package com.agency04.sbss.pizza;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class PizzaDeliveryServiceImpl implements PizzaDeliveryService{
 
     private PizzeriaNumeroUnoService pizzeriaNumeroUnoService;
     private PizzeriaNumeroDueService pizzeriaNumeroDueService;
 
-    public PizzaDeliveryServiceImpl(PizzeriaNumeroUnoService pizzeriaNumeroUnoService) {
+    @Autowired
+    public PizzaDeliveryServiceImpl(@Qualifier("pizzeriaNumeroUnoService")PizzeriaNumeroUnoService pizzeriaNumeroUnoService) {
         this.pizzeriaNumeroUnoService = pizzeriaNumeroUnoService;
     }
 
-    public void setPizzeriaNumeroDue(PizzeriaNumeroDueService pizzeriaNumeroDueService) {
+    @Autowired
+    public void setPizzeriaNumeroDue(@Qualifier("pizzeriaNumeroDueService")PizzeriaNumeroDueService pizzeriaNumeroDueService) {
         this.pizzeriaNumeroDueService = pizzeriaNumeroDueService;
     }
 
     @Override
     public String orderPizza(Pizza pizza){
 
-        return  "New order: \n" + pizzeriaNumeroDueService.makePizza(pizza);
+        return  "New order: \n" + pizzeriaNumeroUnoService.makePizza(pizza);
     }
 
 }

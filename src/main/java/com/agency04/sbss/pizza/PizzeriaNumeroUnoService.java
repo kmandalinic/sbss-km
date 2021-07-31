@@ -1,7 +1,13 @@
 package com.agency04.sbss.pizza;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class PizzeriaNumeroUnoService implements PizzeriaService {
+    @Value("${uno.name}")
     private String name;
+    @Value("${uno.address}")
     private  String address;
 
     @Override
@@ -14,7 +20,7 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     }
     @Override
     public  String makePizza(Pizza pizza){
-        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + ")";
+        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at "+ address + ")";
     }
 
     public void setName(String name) {

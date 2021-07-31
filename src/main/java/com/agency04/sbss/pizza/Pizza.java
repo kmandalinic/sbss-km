@@ -4,5 +4,5 @@ import java.util.Set;
 
 public interface Pizza {
     String  getName();
-    Set getIngredients();
+    Set<PizzaIngredient> getIngredients();
 }

@@ -10,7 +10,7 @@ public class PizzaFruttidimare implements Pizza {
         return "Frutti di Mare";
     }
     @Override
-    public Set getIngredients(){
+    public Set<PizzaIngredient> getIngredients(){
         return ingredients;
     }
 

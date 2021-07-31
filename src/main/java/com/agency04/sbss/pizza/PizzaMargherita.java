@@ -9,7 +9,7 @@ public class PizzaMargherita implements Pizza{
         return "Margherita";
     }
     @Override
-    public Set getIngredients(){
+    public Set<PizzaIngredient> getIngredients(){
 
         return ingredients;
     }
