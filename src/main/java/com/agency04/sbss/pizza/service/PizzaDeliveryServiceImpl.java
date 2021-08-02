@@ -1,13 +1,12 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
-public class PizzaDeliveryServiceImpl implements PizzaDeliveryService{
+public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
 
     private PizzeriaNumeroUnoService pizzeriaNumeroUnoService;
     private PizzeriaNumeroDueService pizzeriaNumeroDueService;

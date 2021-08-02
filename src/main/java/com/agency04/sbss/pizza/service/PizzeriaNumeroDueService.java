@@ -1,16 +1,19 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Locale;
 
 @Component
-public class PizzeriaNumeroUnoService implements PizzeriaService {
-    @Value("${uno.name}")
+public class PizzeriaNumeroDueService implements PizzeriaService {
+
+    @Value("${due.name}")
     private String name;
-    @Value("${uno.address}")
+    @Value("${due.address}")
     private  String address;
 
     @Override
@@ -23,7 +26,7 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     }
     @Override
     public  String makePizza(Pizza pizza){
-        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at "+ address + ")";
+        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at " + address +")" ;
     }
 
     public void setName(String name) {
@@ -33,12 +36,13 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     public void setAddress(String address) {
         this.address = address;
     }
+
     @PostConstruct
     public void purchaseIngredients(){
-        System.out.println("Order fresh ingredients every day for UNO!");
+        System.out.println("Order fresh ingredients every day for "+ name.toUpperCase(Locale.ROOT) + "!");
     }
     @PreDestroy
     public void makePurchase(){
-        System.out.println("Purchase is made every day at 8am!");
+        System.out.println("Purchase is made every day at 9am and delivered at "+ address + "!");
     }
 }

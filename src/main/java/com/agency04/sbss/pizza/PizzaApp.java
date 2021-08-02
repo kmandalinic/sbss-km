@@ -1,5 +1,8 @@
 package com.agency04.sbss.pizza;
 
+import com.agency04.sbss.pizza.model.Pizza;
+import com.agency04.sbss.pizza.model.PizzaMargherita;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class PizzaApp {
