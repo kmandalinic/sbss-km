@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
 public class PizzaDeliveryServiceImpl implements PizzaDeliveryService{
 
@@ -23,7 +25,8 @@ public class PizzaDeliveryServiceImpl implements PizzaDeliveryService{
     @Override
     public String orderPizza(Pizza pizza){
 
-        return  "New order: \n" + pizzeriaNumeroUnoService.makePizza(pizza);
+        return  "New order: \n" + pizzeriaNumeroUnoService.makePizza(pizza) + "\n" + pizzeriaNumeroDueService.makePizza(pizza);
     }
+
 
 }

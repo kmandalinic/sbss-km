@@ -3,6 +3,9 @@ package com.agency04.sbss.pizza;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
 public class PizzeriaNumeroDueService implements PizzeriaService{
 
@@ -30,5 +33,14 @@ public class PizzeriaNumeroDueService implements PizzeriaService{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @PostConstruct
+    public void purchaseIngredients(){
+        System.out.println("Order fresh ingredients every day for DUE!");
+    }
+    @PreDestroy
+    public void makePurchase(){
+        System.out.println("Purchase is made every day at 9am!");
     }
 }
