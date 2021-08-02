@@ -8,24 +8,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
 
-    private PizzeriaNumeroUnoService pizzeriaNumeroUnoService;
-    private PizzeriaNumeroDueService pizzeriaNumeroDueService;
+    private PizzeriaService pizzeriaService;
 
     @Autowired
-    public PizzaDeliveryServiceImpl(@Qualifier("pizzeriaNumeroUnoService")PizzeriaNumeroUnoService pizzeriaNumeroUnoService) {
-        this.pizzeriaNumeroUnoService = pizzeriaNumeroUnoService;
-    }
-
-    @Autowired
-    public void setPizzeriaNumeroDue(@Qualifier("pizzeriaNumeroDueService")PizzeriaNumeroDueService pizzeriaNumeroDueService) {
-        this.pizzeriaNumeroDueService = pizzeriaNumeroDueService;
+    public void setPizzeriaService(@Qualifier("pizzeriaNumeroUnoService") PizzeriaService pizzeriaService) {
+        this.pizzeriaService = pizzeriaService;
     }
 
     @Override
     public String orderPizza(Pizza pizza){
+        return  "New order: \n" + pizzeriaService.makePizza(pizza);
 
-        return  "New order: \n" + pizzeriaNumeroUnoService.makePizza(pizza) + "\n" + pizzeriaNumeroDueService.makePizza(pizza);
     }
-
 
 }
