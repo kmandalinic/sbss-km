@@ -11,7 +11,6 @@ public class PizzaApp {
         Pizza fruttidimare = new PizzaFruttidimare();
         Pizza quattrostagioni = new PizzaQuatrostagioni();
 
-
         PizzaDeliveryService pizzaDeliveryService = context.getBean("pizzaDeliveryServiceImpl", PizzaDeliveryService.class);
         System.out.println(pizzaDeliveryService.orderPizza(quattrostagioni));
 
