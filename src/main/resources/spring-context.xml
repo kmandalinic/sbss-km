@@ -8,5 +8,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Define your Beans here -->
+    <context:component-scan base-package="com.agency04.sbss"/>
+    <context:property-placeholder location="application.properties"/>
 
 </beans>
