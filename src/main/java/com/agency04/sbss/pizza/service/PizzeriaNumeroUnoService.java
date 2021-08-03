@@ -12,8 +12,6 @@ import javax.annotation.PreDestroy;
 import java.util.Locale;
 
 @Service
-@Scope("prototype")
-@Primary
 public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Value("${uno.name}")
     private String name;
@@ -40,12 +38,13 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     public void setAddress(String address) {
         this.address = address;
     }
+
     @PostConstruct
     public void purchaseIngredients(){
-        System.out.println("Order fresh ingredients every day for " + name.toUpperCase(Locale.ROOT) + "!");
+        System.out.println("Pizzeria " + name.toUpperCase(Locale.ROOT) + " starting!");
     }
     @PreDestroy
     public void makePurchase(){
-        System.out.println("Purchase is made every day at 8am and delivered at "+ address + "!" );
+        System.out.println("Closing pizzeria " + name.toUpperCase(Locale.ROOT) + "!");
     }
 }

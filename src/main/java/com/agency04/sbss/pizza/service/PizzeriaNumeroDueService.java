@@ -39,11 +39,11 @@ public class PizzeriaNumeroDueService implements PizzeriaService {
     }
 
     @PostConstruct
-    public void purchaseIngredients(){
-        System.out.println("Order fresh ingredients every day for "+ name.toUpperCase(Locale.ROOT) + "!");
+    public void startPizzeriaDue(){
+        System.out.println("Pizzeria " + name.toUpperCase(Locale.ROOT) + " starting!");
     }
     @PreDestroy
-    public void makePurchase(){
-        System.out.println("Purchase is made every day at 9am and delivered at "+ address + "!");
+    public void stopPizzeriaDue(){
+        System.out.println("Closing pizzeria " + name.toUpperCase(Locale.ROOT) + "!");
     }
 }
