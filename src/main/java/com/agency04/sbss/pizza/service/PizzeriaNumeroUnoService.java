@@ -2,6 +2,7 @@ package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import javax.annotation.PreDestroy;
 import java.util.Locale;
 
 @Component
+@Scope("prototype")
 public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Value("${uno.name}")
     private String name;
