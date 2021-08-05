@@ -1,10 +1,15 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class PizzeriaNumeroDueService implements PizzeriaService{
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.Locale;
+
+@Service
+public class PizzeriaNumeroDueService implements PizzeriaService {
 
     @Value("${due.name}")
     private String name;
@@ -30,5 +35,14 @@ public class PizzeriaNumeroDueService implements PizzeriaService{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @PostConstruct
+    public void startPizzeriaDue(){
+        System.out.println("Pizzeria " + name.toUpperCase(Locale.ROOT) + " starting!");
+    }
+    @PreDestroy
+    public void stopPizzeriaDue(){
+        System.out.println("Closing pizzeria " + name.toUpperCase(Locale.ROOT) + "!");
     }
 }
