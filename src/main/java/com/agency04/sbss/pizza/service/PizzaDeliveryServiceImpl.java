@@ -20,4 +20,8 @@ public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
         return  "New order: \n" + pizzeriaService.makePizza(pizza);
     }
 
+    public  String getPizzeriaInfo(){
+        return "Pizzeria Numero " + pizzeriaService.getName() + ' ' + "Address: " + pizzeriaService.getAddress();
+    }
+
 }

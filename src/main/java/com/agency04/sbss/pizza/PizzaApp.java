@@ -15,16 +15,8 @@ public class PizzaApp {
 
     public static void main(String[] args) {
 
+        SpringApplication.run(PizzaApp.class, args);
 
-        ConfigurableApplicationContext context = SpringApplication.run(PizzaApp.class, args);
-
-        Pizza margherita = new PizzaMargherita();
-        PizzeriaService pizzeriaService = context.getBean(PizzeriaService.class);
-        System.out.println(pizzeriaService.makePizza(margherita));
-        PizzaDeliveryService pizzaDeliveryService = context.getBean(PizzaDeliveryService.class);
-
-        System.out.println(pizzaDeliveryService.orderPizza(margherita));
-        context.close();
     }
 
 }

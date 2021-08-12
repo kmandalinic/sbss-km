@@ -6,4 +6,6 @@ public interface PizzeriaService {
     String getName();
     String getAddress();
     String makePizza(Pizza pizza);
+    String getMenu();
+
 }

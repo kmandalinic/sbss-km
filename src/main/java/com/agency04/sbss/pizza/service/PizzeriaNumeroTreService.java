@@ -24,4 +24,16 @@ public class PizzeriaNumeroTreService implements  PizzeriaService{
     public String makePizza(Pizza pizza) {
         return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at "+ address + ")";
     }
+    @Override
+    public String getMenu() {
+        return null;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
