@@ -1,5 +1,6 @@
 package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.model.Menu;
 import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class PizzeriaNumeroDueService implements PizzeriaService {
         return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at " + address +")" ;
     }
     @Override
-    public String getMenu() {
+    public Menu getMenu() {
         return null;
     }
 

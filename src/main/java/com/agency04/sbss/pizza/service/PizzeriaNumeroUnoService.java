@@ -2,6 +2,7 @@ package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.model.Menu;
 import com.agency04.sbss.pizza.model.Pizza;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -16,27 +17,29 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Value("${uno.name}")
     private String name;
     @Value("${uno.address}")
-    private  String address;
+    private String address;
 
-    private Menu unoMenu = new Menu();
-
+    @Autowired
+    private Menu unoMenu;
 
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
+
     @Override
-    public  String getAddress(){
+    public String getAddress() {
         return address;
-    }
-    @Override
-    public  String makePizza(Pizza pizza){
-        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at "+ address + ")";
     }
 
     @Override
-    public String getMenu() {
-        return "Pizzeria Numero Uno" + unoMenu.toString();
+    public String makePizza(Pizza pizza) {
+        return "Make pizza " + pizza.getName() + " with: " + pizza.getIngredients() + " (by " + name + " at " + address + ")";
+    }
+
+    @Override
+    public Menu getMenu() {
+        return unoMenu;
     }
 
     public void setName(String name) {
@@ -48,11 +51,12 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     }
 
     @PostConstruct
-    public void purchaseIngredients(){
-        System.out.println("Pizzeria " + name.toUpperCase(Locale.ROOT) + " starting!");
+    public void purchaseIngredients() {
+        System.out.println(name + " starting!");
     }
+
     @PreDestroy
-    public void makePurchase(){
-        System.out.println("Closing pizzeria " + name.toUpperCase(Locale.ROOT) + "!");
+    public void makePurchase() {
+        System.out.println("Closing " + name + "!");
     }
 }

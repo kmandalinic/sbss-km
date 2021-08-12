@@ -16,15 +16,16 @@ public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
     }
 
     @Override
-    public String orderPizza(Pizza pizza){
-        return  "New order: \n" + pizzeriaService.makePizza(pizza);
+    public String orderPizza(Pizza pizza) {
+        return "New order: \n" + pizzeriaService.makePizza(pizza);
     }
 
-    public  String getPizzeriaInfo(){
-        return "Pizzeria Numero " + pizzeriaService.getName() + ' ' + "Address: " + pizzeriaService.getAddress();
+    public String getPizzeriaInfo() {
+        return pizzeriaService.getName() + " " + "Address: " + pizzeriaService.getAddress();
     }
-    public String getMenu(){
-        return pizzeriaService.getMenu();
+
+    public String getMenu() {
+        return pizzeriaService.getName() + "\n" + pizzeriaService.getMenu();
     }
 
 }

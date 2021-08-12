@@ -1,10 +1,6 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.controller;
 
-import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryServiceImpl;
-import com.agency04.sbss.pizza.service.PizzeriaNumeroUnoService;
-import com.agency04.sbss.pizza.service.PizzeriaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +16,12 @@ public class PizzeriaController {
     }
 
     @GetMapping("")
-    public String getDetails(){
+    public String getDetails() {
         return pizzaDeliveryService.getPizzeriaInfo();
     }
 
     @GetMapping("/menu")
-    public String getMenu(){
-       return pizzaDeliveryService.getMenu();
+    public String getMenu() {
+        return pizzaDeliveryService.getMenu();
     }
 }
