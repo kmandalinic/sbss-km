@@ -23,4 +23,9 @@ public class PizzeriaController {
     public String getDetails(){
         return pizzaDeliveryService.getPizzeriaInfo();
     }
+
+    @GetMapping("/menu")
+    public String getMenu(){
+       return pizzaDeliveryService.getMenu();
+    }
 }

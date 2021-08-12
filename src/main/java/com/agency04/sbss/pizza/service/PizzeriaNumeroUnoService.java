@@ -18,6 +18,8 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Value("${uno.address}")
     private  String address;
 
+    private Menu unoMenu = new Menu();
+
 
     @Override
     public String getName(){
@@ -34,7 +36,7 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
 
     @Override
     public String getMenu() {
-        return null;
+        return "Pizzeria Numero Uno" + unoMenu.toString();
     }
 
     public void setName(String name) {

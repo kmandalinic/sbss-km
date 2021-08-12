@@ -23,5 +23,8 @@ public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
     public  String getPizzeriaInfo(){
         return "Pizzeria Numero " + pizzeriaService.getName() + ' ' + "Address: " + pizzeriaService.getAddress();
     }
+    public String getMenu(){
+        return pizzeriaService.getMenu();
+    }
 
 }
