@@ -2,6 +2,8 @@ package com.agency04.sbss.pizza.controller;
 
 import com.agency04.sbss.pizza.model.Customer;
 import com.agency04.sbss.pizza.service.CustomerServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,21 +17,20 @@ public class CustomerController {
     }
 
     @GetMapping("/{username}")
-    public String getCustomer(@PathVariable("username") String userName){
+    ResponseEntity<Customer> getCustomer(@PathVariable("username") String userName) {
         Customer customer = customerService.getCustomer(userName);
 
-        if(customer != null) {
-            return customer.toString();
-        }
-        else {
-            return "Customer " + userName + " does not exist!";
+        if (customer != null) {
+            return new ResponseEntity<>(customer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     /*
     curl -i --header "Content-Type: application/json" --request POST --data "{\"userName\":\"Kate\",\"address\":\"mejasi\",\"phoneNumber\":123456}" http://localhost:8080/api/customer
     */
-    @PostMapping("")
+    @PostMapping
     public void addCustomer(@RequestBody Customer customer) {
         if (customerService.customerExists(customer.getUserName())) {
             updateCustomer(customer);
@@ -37,13 +38,13 @@ public class CustomerController {
         customerService.addCustomer(customer);
     }
 
-    @PutMapping("")
+    @PutMapping
     public void updateCustomer(@RequestBody Customer customer) {
         customerService.updateCustomer(customer);
     }
 
     @DeleteMapping("/{username}")
-    public void deleteCustomer(@PathVariable("username") String userName){
+    public void deleteCustomer(@PathVariable("username") String userName) {
         customerService.deleteCustomer(userName);
     }
 }

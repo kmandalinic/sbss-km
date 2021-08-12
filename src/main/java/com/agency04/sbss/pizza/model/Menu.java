@@ -21,14 +21,6 @@ public class Menu {
         return pizzaSizes;
     }
 
-    @Override
-    public String toString(){
-        StringBuilder pizzaString = new StringBuilder();
-        for(Pizza pizza:pizzas){
-            pizzaString.append("\t" + pizza.getName()+ pizza.getIngredients() +"\n");
-        }
-        return "Menu\n" + "PIZZA\n" + pizzaString + "PIZZA SIZE\n\t" + pizzaSizes ;
-    }
     private void configureMenu(){
         Set<Pizza> pizzaSet = new HashSet<>();
         pizzaSet.add(new PizzaMargherita());
