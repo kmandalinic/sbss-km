@@ -1,50 +1,69 @@
 package com.agency04.sbss.pizza.controller;
 
+import com.agency04.sbss.pizza.exception.CustomerAlreadyExistsException;
+import com.agency04.sbss.pizza.exception.CustomerNotFoundException;
 import com.agency04.sbss.pizza.model.Customer;
-import com.agency04.sbss.pizza.service.CustomerServiceImpl;
-import org.springframework.http.HttpStatus;
+import com.agency04.sbss.pizza.repository.CustomerRepository;
+import com.agency04.sbss.pizza.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
 
-    final CustomerServiceImpl customerService;
+    private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerServiceImpl customerService) {
+    public CustomerController(CustomerRepository customerRepository, CustomerService customerService) {
+        this.customerRepository = customerRepository;
         this.customerService = customerService;
     }
 
+    @GetMapping
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
+    }
+
     @GetMapping("/{username}")
-    ResponseEntity<Customer> getCustomer(@PathVariable("username") String userName) {
-        Customer customer = customerService.getCustomer(userName);
-
-        if (customer != null) {
-            return new ResponseEntity<>(customer, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    ResponseEntity<Customer> getCustomerByUsername(@PathVariable("username") String userName) throws CustomerNotFoundException {
+        Customer customer = customerService.getCustomer(userName).orElseThrow(() -> new CustomerNotFoundException(userName));
+        return ResponseEntity.ok().body(customer);
     }
 
-    /*
-    curl -i --header "Content-Type: application/json" --request POST --data "{\"userName\":\"Kate\",\"address\":\"mejasi\",\"phoneNumber\":123456}" http://localhost:8080/api/customer
-    */
     @PostMapping
-    public void addCustomer(@RequestBody Customer customer) {
-        if (customerService.customerExists(customer.getUserName())) {
-            updateCustomer(customer);
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+        Optional<Customer> customer1 = customerRepository.findById(customer.getUserName());
+        if (customer1.isPresent()) {
+            {
+                throw new CustomerAlreadyExistsException(customer.getUserName());
+            }
         }
-        customerService.addCustomer(customer);
+        return ResponseEntity.ok(customerRepository.save(customer));
     }
 
-    @PutMapping
-    public void updateCustomer(@RequestBody Customer customer) {
-        customerService.updateCustomer(customer);
+    @PutMapping("/{username}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable("username") String userName, @RequestBody Customer
+            customerDetails) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(userName).orElseThrow(() -> new CustomerNotFoundException(userName));
+        customer.setCustomerDetails(customerDetails.getCustomerDetails());
+        final Customer updatedCustomer = customerRepository.save(customer);
+        return ResponseEntity.ok(updatedCustomer);
     }
 
     @DeleteMapping("/{username}")
-    public void deleteCustomer(@PathVariable("username") String userName) {
-        customerService.deleteCustomer(userName);
+    public Map<String, Boolean> deleteCustomer(@PathVariable("username") String userName) throws
+            CustomerNotFoundException {
+        Customer customer = customerRepository.findById(userName).orElseThrow(() -> new CustomerNotFoundException(userName));
+        customerRepository.delete(customer);
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }

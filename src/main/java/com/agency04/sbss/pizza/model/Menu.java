@@ -1,39 +1,29 @@
 package com.agency04.sbss.pizza.model;
 
+import com.agency04.sbss.pizza.repository.PizzaRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+@Service
 public class Menu {
-    private Set<Pizza> pizzas;
-    private List<PizzaSize> pizzaSizes;
 
-    public Menu(){
-        configureMenu();
+    private final PizzaRepository pizzaRepository;
+
+    public Menu(PizzaRepository pizzaRepository) {
+        this.pizzaRepository = pizzaRepository;
     }
 
-    public Set<Pizza> getPizzas(){
-        return pizzas;
+    public List<Pizza> getPizzas(){
+        return pizzaRepository.findAll();
     }
-
-    public List<PizzaSize> getPizzaSizes() {
-        return pizzaSizes;
-    }
-
-    private void configureMenu(){
-        Set<Pizza> pizzaSet = new HashSet<>();
-        pizzaSet.add(new PizzaMargherita());
-        pizzaSet.add(new PizzaFruttidimare());
-        pizzaSet.add(new PizzaQuatrostagioni());
-        this.pizzas = pizzaSet;
-
+    public List<PizzaSize> getPizzaSizes(){
         List<PizzaSize> sizes = new ArrayList<>();
         sizes.add(PizzaSize.SMALL);
         sizes.add(PizzaSize.MEDIUM);
         sizes.add(PizzaSize.LARGE);
         sizes.add(PizzaSize.JUMBO);
-        this.pizzaSizes=sizes;
+        return sizes;
     }
 }
-

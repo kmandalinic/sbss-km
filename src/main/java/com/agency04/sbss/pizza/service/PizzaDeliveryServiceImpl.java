@@ -1,9 +1,9 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.exception.NoPizzaFoundException;
-import com.agency04.sbss.pizza.model.DeliveryOrderForm;
-import com.agency04.sbss.pizza.model.Menu;
 import com.agency04.sbss.pizza.model.PizzaOrder;
+import com.agency04.sbss.pizza.repository.PizzaOrderRepository;
+import com.agency04.sbss.pizza.repository.PizzaRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,13 @@ import java.util.List;
 @Service
 public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
     private PizzeriaService pizzeriaService;
-    private List<DeliveryOrderForm> orders = new ArrayList<>();
+    private List<PizzaOrder> orders = new ArrayList<>();
+
+    private PizzaOrderRepository pizzaOrderRepository;
+
+    public PizzaDeliveryServiceImpl(PizzaOrderRepository pizzaOrderRepository) {
+        this.pizzaOrderRepository = pizzaOrderRepository;
+    }
 
     //@Qualifier("pizzeriaNumeroUnoService") has a higher priority than @Primary
     @Autowired
@@ -22,26 +28,16 @@ public class PizzaDeliveryServiceImpl implements PizzaDeliveryService {
     }
 
     @Override
-    public void orderPizza(DeliveryOrderForm deliveryOrderForm) {
-        for (PizzaOrder order : deliveryOrderForm.getPizzaOrders()) {
-            if (pizzeriaService.getMenu().getPizzas().stream().filter(pizza -> pizza.getName().equals(order.getPizza()))
-                    .findFirst().orElse(null) == null) {
-                throw new NoPizzaFoundException(order.getPizza());
-            }
-        }
-        orders.add(deliveryOrderForm);
+    public void orderPizza(PizzaOrder pizzaOrder) {
+
     }
 
-    public List<DeliveryOrderForm> getOrders() {
-        return orders;
+    @JsonIgnore
+    public List<PizzaOrder> getOrders() {
+        return pizzaOrderRepository.findAll();
     }
 
     public String getPizzeriaInfo() {
         return pizzeriaService.getName() + " " + "Address: " + pizzeriaService.getAddress();
     }
-
-    public Menu getMenu() {
-        return pizzeriaService.getMenu();
-    }
-
 }

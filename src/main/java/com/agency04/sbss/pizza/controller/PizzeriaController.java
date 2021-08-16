@@ -3,7 +3,6 @@ package com.agency04.sbss.pizza.controller;
 import com.agency04.sbss.pizza.model.Menu;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryServiceImpl;
-import com.agency04.sbss.pizza.service.PizzeriaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/pizzeria")
 public class PizzeriaController {
 
-    private PizzaDeliveryServiceImpl pizzaDeliveryService;
+    private final PizzaDeliveryServiceImpl pizzaDeliveryService;
+    private final Menu menu;
 
-    public PizzeriaController(PizzaDeliveryServiceImpl pizzaDeliveryService) {
+    public PizzeriaController(PizzaDeliveryServiceImpl pizzaDeliveryService, Menu menu) {
         this.pizzaDeliveryService = pizzaDeliveryService;
+        this.menu = menu;
     }
 
     @GetMapping
@@ -27,6 +28,6 @@ public class PizzeriaController {
 
     @GetMapping("/menu")
     ResponseEntity<Menu> getMenu() {
-        return new ResponseEntity<>(pizzaDeliveryService.getMenu(), HttpStatus.OK);
+        return new ResponseEntity<>(menu, HttpStatus.OK);
     }
 }

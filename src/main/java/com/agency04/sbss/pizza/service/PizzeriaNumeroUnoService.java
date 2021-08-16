@@ -1,8 +1,5 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.model.Menu;
-import com.agency04.sbss.pizza.model.Pizza;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -19,9 +16,6 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Value("${uno.address}")
     private String address;
 
-    @Autowired
-    private Menu unoMenu;
-
     @Override
     public String getName() {
         return name;
@@ -30,16 +24,6 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     @Override
     public String getAddress() {
         return address;
-    }
-
-    @Override
-    public String makePizza(Pizza pizza) {
-        return "Make pizza " + pizza.getName() + " with: " + pizza.getIngredients() + " (by " + name + " at " + address + ")";
-    }
-
-    @Override
-    public Menu getMenu() {
-        return unoMenu;
     }
 
     public void setName(String name) {

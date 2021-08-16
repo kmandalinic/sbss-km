@@ -1,16 +1,44 @@
 package com.agency04.sbss.pizza.model;
 
+import javax.persistence.*;
+
+@Entity
 public class PizzaOrder {
 
-    private String pizza;
-    private PizzaSize pizzaSize;
-    private int quantity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long pizzaOrderId;
 
-    public String getPizza() {
+    @ManyToOne
+    private Pizza pizza;
+
+    @Enumerated(EnumType.STRING)
+    private PizzaSize pizzaSize;
+
+    private String quantity;
+
+    public PizzaOrder() {
+    }
+
+    public PizzaOrder(Pizza pizza, PizzaSize pizzaSize, String quantity) {
+        this.pizza = pizza;
+        this.pizzaSize = pizzaSize;
+        this.quantity = quantity;
+    }
+
+    public Long getPizzaOrderId() {
+        return pizzaOrderId;
+    }
+
+    public void setPizzaOrderId(Long pizzaOrderId) {
+        this.pizzaOrderId = pizzaOrderId;
+    }
+
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public void setPizza(String pizza) {
+    public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
 
@@ -22,12 +50,11 @@ public class PizzaOrder {
         this.pizzaSize = pizzaSize;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-
 }

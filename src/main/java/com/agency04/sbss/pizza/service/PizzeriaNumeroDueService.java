@@ -1,7 +1,5 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.model.Menu;
-import com.agency04.sbss.pizza.model.Pizza;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +23,6 @@ public class PizzeriaNumeroDueService implements PizzeriaService {
     public  String getAddress(){
         return address;
     }
-    @Override
-    public  String makePizza(Pizza pizza){
-        return "Make pizza " + pizza.getName() + " with: "+ pizza.getIngredients() + " (by " + name + " at " + address +")" ;
-    }
-    @Override
-    public Menu getMenu() {
-        return null;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -44,10 +34,10 @@ public class PizzeriaNumeroDueService implements PizzeriaService {
 
     @PostConstruct
     public void startPizzeriaDue(){
-        System.out.println("Pizzeria " + name.toUpperCase(Locale.ROOT) + " starting!");
+        System.out.println("Pizzeria " + name + " starting!");
     }
     @PreDestroy
     public void stopPizzeriaDue(){
-        System.out.println("Closing pizzeria " + name.toUpperCase(Locale.ROOT) + "!");
+        System.out.println("Closing pizzeria " + name + "!");
     }
 }
