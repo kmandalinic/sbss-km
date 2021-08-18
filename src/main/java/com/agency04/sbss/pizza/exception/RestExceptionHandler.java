@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({PizzaNotFoundException.class, CustomerNotFoundException.class})
+    @ExceptionHandler({PizzaNotFoundException.class, CustomerNotFoundException.class, DeliveryNotFoundException.class})
     public ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);

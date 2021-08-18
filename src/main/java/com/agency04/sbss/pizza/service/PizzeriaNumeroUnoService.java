@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
 @Service
 @Primary
 public class PizzeriaNumeroUnoService implements PizzeriaService {
@@ -35,12 +34,12 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     }
 
     @PostConstruct
-    public void purchaseIngredients() {
+    public void startPizzeriaUno() {
         System.out.println(name + " starting!");
     }
 
     @PreDestroy
-    public void makePurchase() {
+    public void closePizzeriaUno() {
         System.out.println("Closing " + name + "!");
     }
 }

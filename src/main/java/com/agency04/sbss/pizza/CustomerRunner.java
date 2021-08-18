@@ -6,7 +6,6 @@ import com.agency04.sbss.pizza.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class CustomerRunner implements CommandLineRunner {
 
@@ -24,6 +23,5 @@ public class CustomerRunner implements CommandLineRunner {
 
         customer.setCustomerDetails(customerDetails);
         customerRepository.save(customer);
-
     }
 }

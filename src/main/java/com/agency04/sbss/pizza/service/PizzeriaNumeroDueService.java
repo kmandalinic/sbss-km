@@ -34,10 +34,10 @@ public class PizzeriaNumeroDueService implements PizzeriaService {
 
     @PostConstruct
     public void startPizzeriaDue(){
-        System.out.println("Pizzeria " + name + " starting!");
+        System.out.println(name + " starting!");
     }
     @PreDestroy
     public void stopPizzeriaDue(){
-        System.out.println("Closing pizzeria " + name + "!");
+        System.out.println("Closing " + name + "!");
     }
 }

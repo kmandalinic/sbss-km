@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.controller;
 
 import com.agency04.sbss.pizza.model.Menu;
-import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ public class PizzeriaController {
     }
 
     @GetMapping
-    ResponseEntity<PizzaDeliveryService> getDetails() {
-        return new ResponseEntity<>(pizzaDeliveryService, HttpStatus.OK);
+    ResponseEntity<String> getDetails() {
+        return new ResponseEntity<>(pizzaDeliveryService.getPizzeriaInfo(), HttpStatus.OK);
     }
 
     @GetMapping("/menu")

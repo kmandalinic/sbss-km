@@ -1,10 +1,14 @@
 package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.exception.CustomerAlreadyExistsException;
+import com.agency04.sbss.pizza.exception.CustomerNotFoundException;
 import com.agency04.sbss.pizza.model.Customer;
 import com.agency04.sbss.pizza.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -16,27 +20,41 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean customerExists(String userName) {
-        return customerRepository.existsById(userName);
+    public Customer getCustomer(String userName) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(userName).orElseThrow(()-> new CustomerNotFoundException(userName));
+        return customer;
     }
 
     @Override
-    public Optional<Customer> getCustomer(String userName) {
-        return customerRepository.findById(userName);
+    public Customer addCustomer(Customer customer) {
+        if(customerRepository.existsById(customer.getUserName())){
+            throw new CustomerAlreadyExistsException(customer.getUserName());
+        }
+        return customerRepository.save(customer);
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public Customer updateCustomer(String userName, Customer customer) {
+        if(!customerRepository.existsById(userName)){
+            throw new CustomerNotFoundException(userName);
+        }
+        Customer customer1 = customerRepository.getOne(userName);
+        customer1.setCustomerDetails(customer.getCustomerDetails());
+        return customerRepository.save(customer1);
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
-        customerRepository.save(customer);
-    }
-
-    @Override
-    public void deleteCustomer(Customer customer) {
+    public Map<String, Boolean> deleteCustomer(String userName) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(userName).orElseThrow(()-> new CustomerNotFoundException(userName));
         customerRepository.delete(customer);
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", true);
+        return response;
+    }
+
+    @Override
+    public List<Customer> customerList() {
+        return customerRepository.findAll();
     }
 }
