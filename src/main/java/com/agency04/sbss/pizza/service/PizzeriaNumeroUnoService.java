@@ -1,15 +1,11 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.model.Menu;
-import com.agency04.sbss.pizza.model.Pizza;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
 
 @Service
 @Primary
@@ -18,9 +14,6 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     private String name;
     @Value("${uno.address}")
     private String address;
-
-    @Autowired
-    private Menu unoMenu;
 
     @Override
     public String getName() {
@@ -32,16 +25,6 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
         return address;
     }
 
-    @Override
-    public String makePizza(Pizza pizza) {
-        return "Make pizza " + pizza.getName() + " with: " + pizza.getIngredients() + " (by " + name + " at " + address + ")";
-    }
-
-    @Override
-    public Menu getMenu() {
-        return unoMenu;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -51,12 +34,12 @@ public class PizzeriaNumeroUnoService implements PizzeriaService {
     }
 
     @PostConstruct
-    public void purchaseIngredients() {
+    public void startPizzeriaUno() {
         System.out.println(name + " starting!");
     }
 
     @PreDestroy
-    public void makePurchase() {
+    public void closePizzeriaUno() {
         System.out.println("Closing " + name + "!");
     }
 }
